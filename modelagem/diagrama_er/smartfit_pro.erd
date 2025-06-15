@@ -1,21 +1,21 @@
 erdiagram SmartFitPro
 
-notation=default
+// Options
+notation=crowsfoot
 
+// Entities
 entity Usuario {
     id key
     nome
     email
     data_nascimento
 }
-
 entity Academia {
     id key
     nome
     endereco
     telefone
 }
-
 entity CheckIn {
     id key
     data_hora
@@ -24,21 +24,18 @@ entity CheckIn {
     usuario_id
     academia_id
 }
-
 entity PlanoTreino {
     id key
     nome
     data_criacao
     usuario_id
 }
-
 entity Exercicio {
     id key
     nome
     descricao
     video_url
 }
-
 entity ItemPlano {
     id key
     series
@@ -46,7 +43,6 @@ entity ItemPlano {
     plano_id
     exercicio_id
 }
-
 entity Dieta {
     id key
     nome
@@ -54,14 +50,12 @@ entity Dieta {
     objetivo_calorias
     usuario_id
 }
-
 entity Refeicao {
     id key
     tipo
     calorias
     dieta_id
 }
-
 entity Receita {
     id key
     nome
@@ -69,34 +63,28 @@ entity Receita {
     ingredientes
 }
 
-relationship RelUsuarioCheckIn {
-    Usuario -> CheckIn
+// Relationships
+relationship FazCheckIn {
+    Usuario[1] -> CheckIn[N]
 }
-
-relationship RelAcademiaCheckIn {
-    Academia -> CheckIn
+relationship RegistradoEm {
+    Academia[1] -> CheckIn[N]
 }
-
-relationship RelUsuarioPlanoTreino {
-    Usuario -> PlanoTreino
+relationship TemPlanoTreino {
+    Usuario[1] -> PlanoTreino[N]
 }
-
-relationship RelPlanoTreinoItemPlano {
-    PlanoTreino -> ItemPlano
+relationship ContemItemPlano {
+    PlanoTreino[1] -> ItemPlano[N]
 }
-
-relationship RelExercicioItemPlano {
-    Exercicio -> ItemPlano
+relationship RelacionaExercicio {
+    ItemPlano[N] -> Exercicio[1]
 }
-
-relationship RelUsuarioDieta {
-    Usuario -> Dieta
+relationship TemDieta {
+    Usuario[1] -> Dieta[N]
 }
-
-relationship RelDietaRefeicao {
-    Dieta -> Refeicao
+relationship TemRefeicao {
+    Dieta[1] -> Refeicao[N]
 }
-
-relationship RelRefeicaoReceita {
-    Refeicao -> Receita
+relationship RelacionaReceita {
+    Refeicao[N] -> Receita[1]
 }
